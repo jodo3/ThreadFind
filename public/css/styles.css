@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto';
+  font-size: 15px;
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+
+  .comment-container {
+    display: flex;
+
+    .profile {
+      border-radius: 50%;
+      width: 40px;
+      height: fit-content;
+      margin-right: 10px;
+    }
+
+    &.child .profile {
+      width: 28px;
+    }
+    
+    .comment-header {
+      display: flex;
+
+      .username {
+        font-size: 1em;
+        font-weight: 700;
+        margin-block-end: 0.3em;
+        margin-right: 10px;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          color: #d3d3d3;
+        }
+      }
+
+      .comment-date {
+        color: rgb(170, 170, 170);
+      }
+    }
+  }
+  
+  .replies-container {
+    margin-left: 40px;
+    margin-bottom: 15px;
+
+    .more-text {
+      margin-block-start: 0;
+      padding-left: 20px;
+    }
+  }
+  
+  .comment-text {
+    margin-block-start: 0;
+  }
+}
+
+h2 {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}

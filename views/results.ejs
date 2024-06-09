@@ -1,0 +1,53 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+<body>
+  <%- include('./partials/searchbar.ejs', { vidurl }) %>
+  <div class="results-container">
+    <h1 class="results-header">Results for "<%= vidurl %>", comments from <%= user %></h1>
+    <div class="results">
+      <% if (threads.length > 0) {
+        threads.forEach(thread => {
+          let parent = thread.snippet.topLevelComment.snippet; %>
+          <div class="comment-container parent">
+            <img class="profile" src="<%= parent.authorProfileImageUrl %>" alt="">
+            <div class="comment">
+              <div class="comment-header">
+                <a class="username" href="<%= parent.authorChannelUrl %>" target="_blank" rel="noreferrer noopener"><%= parent.authorDisplayName %></a>
+                <div class="comment-date">(<%= parent.publishedAt.toLocaleString('en-US') %>)</div>
+              </div>
+              <p class="comment-text"><%= parent.textOriginal %></p>
+            </div>
+          </div>
+          <div class="replies-container">
+            <% if (Object.hasOwn(thread, "replies")) {
+              thread.replies.comments.forEach(comment => {
+                let child = comment.snippet; %>
+                <div class="comment-container child">
+                  <img class="profile" src="<%= child.authorProfileImageUrl %>" alt="">
+                  <div class="comment">
+                    <div class="comment-header">
+                    <a class="username" href="<%= child.authorChannelUrl %>" target="_blank" rel="noreferrer noopener"><%= child.authorDisplayName %></a>
+                      <div class="comment-date">(<%= child.publishedAt.toLocaleString('en-US') %>)</div>
+                    </div>
+                    <p class="comment-text"><%= child.textOriginal %></p>
+                  </div>                
+                </div>
+            <% }) %>
+
+            <% const replyCount = thread.snippet.totalReplyCount;
+              const displayCount = thread.replies.comments.length;
+              const diff = replyCount - displayCount;
+              if (diff > 0) { %>
+                <h3 class="more-text">(<%= diff %> more repl<%= (diff > 1) ? 'ies' : 'y' %>)</h3>
+            <% }} %>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+    <div class="stats">
+      <h2>Pages searched: <%= pages %></h2>
+      <h2>Threads found: <%= threads.length %></h2>
+    </div>
+  </div>
+</body>
+</html>
