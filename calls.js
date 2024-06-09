@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { channelFilter } from './filter.js';
+import dotenv from 'dotenv'
 
-const API_KEY = "AIzaSyC6jkYbmIXdlyjsTYIN31DQQ8cMR1HhD1M";
+dotenv.config();
+
+const API_KEY = process.env.API_KEY;
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 const call = "commentThreads";
