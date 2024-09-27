@@ -16,13 +16,13 @@ function parseISOString(s) {
 
 function parseDates(threads) {  
   threads.forEach((thread) => {
-    let parent = thread.snippet.topLevelComment.snippet;
+    const parent = thread.snippet.topLevelComment.snippet;
     parent.publishedAt = parseISOString(parent.publishedAt);
     parent.updatedAt = parseISOString(parent.updatedAt);
 
     if (Object.hasOwn(thread, 'replies')) {
       thread.replies.comments.forEach(comment => {
-        let child = comment.snippet;
+        const child = comment.snippet;
         child.publishedAt = parseISOString(child.publishedAt);
         child.updatedAt = parseISOString(child.updatedAt);
       });
