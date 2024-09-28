@@ -24,6 +24,9 @@ export async function searchComments(video, user, maxPages = MAX_PAGES) {
   
   while (pageToken != -1 && pages < maxPages) {
     const response = await getFilteredThreads(video, user, pageToken);
+    if (!response) {
+      return { errors: `Video URL '${video}' not found, try again` }
+    }
     filtered.push(...response.data);
     pageToken = response.next;
     pages += 1;

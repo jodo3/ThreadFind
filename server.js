@@ -14,13 +14,21 @@ app.get('/', async(req, res) => {
 })
 
 app.get('/search', async (req, res) => {
-  const { threads, pages } = await searchComments(req.query.video, req.query.user || undefined);
-  res.render("results", {
-    vidurl: req.query.video,
-    user: req.query.user || "OP channel",
-    threads,
-    pages,
-  });
+  const { threads, pages, errors } = await searchComments(req.query.video, req.query.user || undefined);
+  if (errors) {
+    res.render("searchError", {
+      vidurl: req.query.video,
+      errors
+    })
+  }
+  else {
+    res.render("results", {
+      vidurl: req.query.video,
+      user: req.query.user || "OP channel",
+      threads,
+      pages,
+    });
+  }
 })
 
 app.listen(port, () => {

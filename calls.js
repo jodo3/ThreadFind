@@ -33,7 +33,8 @@ export async function getFilteredThreads(video = "SwSbnmqk3zY", user, page) {
     const result = { data: filtered, next: nextPage };
     return result;
   } catch (error) {
-    console.log(error);
+    console.log(`ERROR with query: ${url}`);
+    return null;
   }
 }
 
